@@ -1,0 +1,38 @@
+package com.example.week7ecommerceapp.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "products")
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @Column(nullable = false)
+    private String productName;
+    @Column(nullable = false)
+    private long serialNum;
+    @Column(nullable = false)
+    private BigDecimal productPrice;
+
+    @Column(nullable = false)
+    private ProductCategory category;
+    @Column(nullable = false)
+    private int units;
+    private String image;
+
+    @ManyToOne
+    @JoinColumn(name = "productId", referencedColumnName = "id")
+    private Cart cart;
+
+}
+
+

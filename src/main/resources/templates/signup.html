@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign Up</title>
+
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        .sign-in {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .sign-in a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .sign-in a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Sign up here</h1>
+
+    <form th:action="@{/signup}" method="POST" th:object="${user}">
+
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" th:field="*{firstName}" name="firstname" required th:required>
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname"  th:field="*{lastName}" required th:required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:field="*{email}" required th:required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:field="*{password}" required th:required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" th:field="*{phoneNumber}" required th:required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" th:field="*{address}" required th:required>
+
+        <input type="submit" value="Sign Up">
+    </form>
+    <div class="sign-in">
+        Already have an account? <a href="signin.html">Sign in</a>
+    </div>
+</div>
+</body>
+</html>

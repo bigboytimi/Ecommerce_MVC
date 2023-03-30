@@ -1,4 +1,4 @@
-package com.example.week7ecommerceapp.DTO;
+package com.example.week7ecommerceapp.dto;
 
 
 import com.example.week7ecommerceapp.model.Product;

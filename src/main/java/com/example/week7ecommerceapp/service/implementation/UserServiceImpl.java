@@ -1,12 +1,10 @@
 package com.example.week7ecommerceapp.service.implementation;
 
+import com.example.week7ecommerceapp.dto.UserDTO;
 import com.example.week7ecommerceapp.model.User;
 import com.example.week7ecommerceapp.repository.UserRepository;
 import com.example.week7ecommerceapp.service.UserService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +18,8 @@ public class UserServiceImpl implements UserService{
     private final UserRepository repo;
 
     @Override
-    public void addUser(User user) {
+    public void addUser(UserDTO userDTO) {
+        User user = new User(userDTO);
         repo.save(user);
     }
 
@@ -62,6 +61,4 @@ public class UserServiceImpl implements UserService{
             return user;
         }
     }
-
-
 }

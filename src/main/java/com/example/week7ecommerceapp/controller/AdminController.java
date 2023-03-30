@@ -1,7 +1,6 @@
 package com.example.week7ecommerceapp.controller;
 
-import com.example.week7ecommerceapp.DTO.ProductDTO;
-import com.example.week7ecommerceapp.DTO.UserDTO;
+import com.example.week7ecommerceapp.dto.ProductDTO;
 import com.example.week7ecommerceapp.model.Product;
 import com.example.week7ecommerceapp.service.ProductService;
 import lombok.RequiredArgsConstructor;

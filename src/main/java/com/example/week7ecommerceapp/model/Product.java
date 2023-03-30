@@ -1,6 +1,6 @@
 package com.example.week7ecommerceapp.model;
 
-import com.example.week7ecommerceapp.DTO.ProductDTO;
+import com.example.week7ecommerceapp.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

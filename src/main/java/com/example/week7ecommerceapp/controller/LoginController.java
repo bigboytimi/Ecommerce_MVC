@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class LoginController {
     }
 
     @PostMapping("/")
-    public String login(UserDTO userDTO, Model model, HttpServletRequest httpServletRequest){
+    public String login(@RequestParam("user") UserDTO userDTO, Model model, HttpServletRequest httpServletRequest){
         User user = userService.findByEmail(userDTO.getEmail());
         if (user == null){
             model.addAttribute("invalid email", "Email does not exist");
@@ -36,5 +38,14 @@ public class LoginController {
         session.setAttribute("usersession", id);
         return "index";
     }
+
+    @GetMapping("/logout-button")
+    public ModelAndView logoutUser(ModelAndView mav, HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        session.invalidate();
+        mav.setViewName("signin");
+        return mav;
+    }
+
 
 }

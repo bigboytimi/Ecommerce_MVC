@@ -17,7 +17,7 @@ public class HomeController {
     @GetMapping("/index")
     public ModelAndView home(ModelAndView mav, HttpServletRequest httpServletRequest){
         HttpSession session = httpServletRequest.getSession();
-        if(session.getAttribute("usernumber")==null){
+        if(session.getAttribute("usersession")==null){
             mav.setViewName("signin");
             return mav;
         }
@@ -25,6 +25,39 @@ public class HomeController {
         return mav;
     }
 
+    @GetMapping("/cart")
+    public ModelAndView cartPage(ModelAndView mav, HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        if(session.getAttribute("usersession")==null){
+            mav.setViewName("login");
+            return mav;
+        }
+        mav.setViewName("cart");
+        return mav;
+    }
+
+    @GetMapping("/wishlist")
+    public ModelAndView wishlistPage(ModelAndView mav, HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        if(session.getAttribute("usersession")==null){
+            mav.setViewName("login");
+            return mav;
+        }
+        mav.setViewName("wishlist");
+        return mav;
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView logoutPage(ModelAndView mav, HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        if(session.getAttribute("usersession")==null){
+            mav.setViewName("login");
+            return mav;
+        }
+
+        mav.setViewName("logout");
+        return mav;
+    }
 
 
 

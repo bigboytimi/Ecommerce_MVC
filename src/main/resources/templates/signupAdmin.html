@@ -82,13 +82,13 @@
 <div class="container">
   <h1>Sign up here</h1>
 
-  <form th:action="@{/signup-admin}" method="POST" th:object="${admin}">
+  <form th:action="@{/signupAdmin}" method="POST" th:object="${admin}">
 
     <label for="firstname">First Name:</label>
     <input type="text" id="firstname" th:field="*{firstName}" name="firstname" required th:required>
 
     <label for="lastname">Last Name:</label>
-    <input type="text" id="lastname" name="lastname"  th:field="*{lastName}" required th:required>
+    <input type="text" id="lastname" name="lastname" th:field="*{lastName}" required th:required>
 
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" th:field="*{email}" required th:required>
@@ -96,10 +96,9 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" th:field="*{password}" required th:required>
 
+    <input type="submit" value="Sign Up">
   </form>
-  <div class="sign-in">
-    <a href="/login-admin">Submit</a>
-  </div>
+
 </div>
 </body>
 </html>

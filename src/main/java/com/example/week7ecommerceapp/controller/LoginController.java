@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
@@ -54,45 +56,27 @@ public class LoginController {
         return mav;
     }
 
-    @GetMapping("/login-admin")
+    @GetMapping("/loginAdmin")
     public String adminLogin(Model model, HttpServletRequest httpServletRequest){
         model.addAttribute("admin", new AdminDTO());
         model.addAttribute("invalid email", null);
         return "loginAdmin";
     }
 
-    @PostMapping("/login-admin")
+    @PostMapping("/loginAdmin")
     public String registerAdmin(@ModelAttribute("admin") AdminDTO adminDTO, Model model, HttpServletRequest httpServletRequest){
-        Admin admin = adminService.findByEmail(adminDTO.getEmail());
+        Optional<Admin> admin = adminService.findByEmail(adminDTO.getEmail());
+
         if(admin == null){
             model.addAttribute("invalid email", "email not found");
             return "signup-admin";
         }
         HttpSession session = httpServletRequest.getSession();
-        Long id = admin.getId();
+        Long id = admin.get().getId();
         session.setAttribute("adminsession", id);
         return "dashboard";
     }
 
-    @GetMapping("/signup-admin")
-    public String getAdminRegister(Model model){
-        model.addAttribute("admin", new AdminDTO());
-        model.addAttribute("admin-exist", "admin-signup");
-        return "signupAdmin";
-    }
-
-    @PostMapping("/signup-admin")
-    public String registerAdmin(@ModelAttribute("admin") AdminDTO adminDTO, Model model){
-        Admin admin = adminService.findByEmail(adminDTO.getEmail());
-        if(admin != null){
-           model.addAttribute("admin-exist", "admin already exists");
-           return "signup-admin";
-        } else{
-            model.addAttribute("admin", adminDTO);
-            adminService.addAdmin(adminDTO);
-            return "login-admin";
-        }
-    }
     @GetMapping("/dashboard")
     public String addProduct(Model model){
         model.addAttribute("product", new ProductDTO());

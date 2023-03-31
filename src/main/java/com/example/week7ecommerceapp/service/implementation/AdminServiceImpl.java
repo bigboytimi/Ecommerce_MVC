@@ -7,15 +7,21 @@ import com.example.week7ecommerceapp.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
 
     public AdminRepository adminRepo;
     @Override
-    public Admin findByEmail(String email) {
-        Admin admin = adminRepo.findAdminByEmail(email).orElse(null);
-        return admin;
+    public Optional<Admin> findByEmail(String email) {
+        Optional<Admin> admin = adminRepo.findAdminByEmail(email);
+        if (admin.isEmpty()){
+            return null;
+        } else{
+            return admin;
+        }
     }
 
     @Override

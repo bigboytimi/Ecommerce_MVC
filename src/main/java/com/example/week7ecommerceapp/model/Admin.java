@@ -23,7 +23,6 @@ public class Admin {
     private String firstName;
     private String lastName;
     private String password;
-
     private String email;
 
     public Admin(AdminDTO adminDTO) {

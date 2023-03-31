@@ -79,17 +79,17 @@
 <body>
 <div class="container">
   <h1>Login</h1>
-  <form th:action="@{/login-admin}" method="post" th:object="${admin}">
+  <form th:action="@{/loginAdmin}" method="post" th:object="${admin}">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" th:field="*{email}" required th:required>
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password"  th:field="*{password}" required th:required>
 
-    <input href="dashboard" type="submit" value="Login">
+    <input type="submit" value="Login">
   </form>
   <div class="sign-up">
-    Want to be an admin? <a href="signup-admin">Register here</a>
+    Want to be an admin? <a href="signupAdmin">Register here</a>
   </div>
 </div>
 </body>

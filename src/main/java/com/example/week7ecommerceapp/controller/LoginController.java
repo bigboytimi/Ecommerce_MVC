@@ -6,6 +6,7 @@ import com.example.week7ecommerceapp.dto.UserDTO;
 import com.example.week7ecommerceapp.model.Admin;
 import com.example.week7ecommerceapp.model.User;
 import com.example.week7ecommerceapp.service.AdminService;
+import com.example.week7ecommerceapp.service.ProductService;
 import com.example.week7ecommerceapp.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -26,6 +28,7 @@ public class LoginController {
 
     private final UserService userService;
     private final AdminService adminService;
+    private final ProductService productService;
 
 
     @GetMapping("/")
@@ -65,21 +68,31 @@ public class LoginController {
 
     @PostMapping("/loginAdmin")
     public String registerAdmin(@ModelAttribute("admin") AdminDTO adminDTO, Model model, HttpServletRequest httpServletRequest){
-        Optional<Admin> admin = adminService.findByEmail(adminDTO.getEmail());
+        Admin admin = adminService.findByEmail(adminDTO.getEmail());
 
         if(admin == null){
             model.addAttribute("invalid email", "email not found");
             return "signup-admin";
         }
         HttpSession session = httpServletRequest.getSession();
-        Long id = admin.get().getId();
-        session.setAttribute("adminsession", id);
+        Long id = admin.getId();
+        session.setAttribute("admin-session", id);
         return "dashboard";
     }
 
     @GetMapping("/dashboard")
-    public String addProduct(Model model){
-        model.addAttribute("product", new ProductDTO());
-        return "dashboard";
+    public ModelAndView getDashboard(ModelAndView model){
+        model.addObject("product", new ProductDTO());
+        model.setViewName("dashboard");
+        return model;
+    }
+
+    @PostMapping("/dashboard")
+    public ModelAndView addProduct(@ModelAttribute("product") ProductDTO productDTO, ModelAndView mav, RedirectAttributes redirectAttributes){
+        productService.saveProduct(productDTO);
+        redirectAttributes.addFlashAttribute("product added", "product saved successfully");
+        mav.addObject("product added", "product successfully added");
+        mav.setViewName("dashboard");
+        return mav;
     }
 }

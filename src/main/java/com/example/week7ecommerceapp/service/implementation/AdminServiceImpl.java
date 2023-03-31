@@ -5,6 +5,7 @@ import com.example.week7ecommerceapp.model.Admin;
 import com.example.week7ecommerceapp.repository.AdminRepository;
 import com.example.week7ecommerceapp.service.AdminService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,11 +14,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
 
+    @Autowired
     public AdminRepository adminRepo;
     @Override
-    public Optional<Admin> findByEmail(String email) {
-        Optional<Admin> admin = adminRepo.findAdminByEmail(email);
-        if (admin.isEmpty()){
+    public Admin findByEmail(String email) {
+        Admin admin = adminRepo.findByEmail(email);
+        if (admin == null){
             return null;
         } else{
             return admin;
@@ -25,8 +27,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addAdmin(AdminDTO adminDTO) {
+    public void save(AdminDTO adminDTO) {
         Admin admin = new Admin(adminDTO);
         adminRepo.save(admin);
     }
+
+
 }

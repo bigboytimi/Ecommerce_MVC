@@ -17,15 +17,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AdminController {
     private final ProductService productService;
 
-    @PostMapping("/add-product")
-    public String saveProduct(@ModelAttribute("product") ProductDTO productDTO, RedirectAttributes redirectAttributes){
-        ModelAndView mav = new ModelAndView();
-        Product product = new Product(productDTO);
-        productService.saveProduct(product);
-        mav.addObject("product-added", "product saved successful");
-        redirectAttributes.addFlashAttribute("product-added", "product saved successful");
-        return "redirect:/dashboard";
-    }
+//    @PostMapping("/add-product")
+//    public String saveProduct(@ModelAttribute("product") ProductDTO productDTO, RedirectAttributes redirectAttributes){
+//        ModelAndView mav = new ModelAndView();
+//        Product product = new Product(productDTO);
+//        productService.saveProduct(productDTO);
+//        mav.addObject("product-added", "product saved successful");
+//        redirectAttributes.addFlashAttribute("product-added", "product saved successful");
+//        return "redirect:/dashboard";
+//    }
 
 
 }

@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AdminSignupController {
     private final AdminService adminService;
-    private final AdminRepository adminrepo;
 
     @GetMapping("/signupAdmin")
     public String getAdminRegister(Model model){
@@ -29,14 +28,7 @@ public class AdminSignupController {
 
     @PostMapping("/signupAdmin")
     public String registerAdmin(@ModelAttribute("admin") AdminDTO adminDTO, Model model){
-        Optional<Admin> admin = adminService.findByEmail(adminDTO.getEmail());
-        if(admin != null){
-            model.addAttribute("admin-exist", "admin already exists");
-            return "signupAdmin";
-        } else{
-            model.addAttribute("admin", adminDTO);
-            adminService.addAdmin(adminDTO);
+            adminService.save(adminDTO);
             return "loginAdmin";
-        }
     }
 }

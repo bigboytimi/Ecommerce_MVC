@@ -1,5 +1,6 @@
 package com.example.week7ecommerceapp.service.implementation;
 
+import com.example.week7ecommerceapp.dto.ProductDTO;
 import com.example.week7ecommerceapp.model.Product;
 import com.example.week7ecommerceapp.repository.ProductRepository;
 import com.example.week7ecommerceapp.service.ProductService;
@@ -18,7 +19,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository prodRepo;
     @Override
-    public void saveProduct(Product product) {
+    public void saveProduct(ProductDTO productDTO) {
+        Product product = new Product(productDTO);
         prodRepo.save(product);
     }
 

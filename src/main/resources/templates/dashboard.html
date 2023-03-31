@@ -33,30 +33,24 @@
 <body>
 <h1>Admin, Welcome to Dashboard</h1>
 <h3>Add or Edit Products Here</h3>
-<!-- Use Thymeleaf to set the action URL and the form method -->
-<form method="post" th:action="@{/dashboard-form}" th:object="${product}">
+
+<form method="post" th:action="@{/dashboard-page}" th:object="${product}">
   <label for="productName">Product Name:</label>
-  <!-- Use Thymeleaf to bind the product name property to the input field -->
   <input type="text" id="productName" th:field="*{productName}" required>
 
   <label for="category">Category:</label>
-  <!-- Use Thymeleaf to bind the product name property to the input field -->
   <input type="text" id="category" th:field="*{category}" required>
 
   <label for="productQuantity">Quantity:</label>
-  <!-- Use Thymeleaf to bind the product quantity property to the input field -->
   <input type="number" id="productQuantity" th:field="*{quantity}" min="0" required>
 
   <label for="productDescription">Product Description:</label>
-  <!-- Use Thymeleaf to bind the product description property to the textarea field -->
   <textarea id="productDescription" th:field="*{description}" required></textarea>
 
   <label for="productPrice">Price:</label>
-  <!-- Use Thymeleaf to bind the product price property to the input field -->
   <input type="number" id="productPrice" th:field="*{price}" min="0" step="0.01" required>
 
-  <!-- Use Thymeleaf to set the button text based on whether we are adding or editing a product -->
-  <button type="submit" th:text="${submitButtonLabel}">Submit</button>
+  <input type="submit" value="Submit">
 </form>
 </body>
 </html>

@@ -79,7 +79,7 @@
 <body>
 <div class="container">
     <h1>Login</h1>
-    <form th:action="@{/}" method="post" th:object="${user}">
+    <form th:action="@{/signin}" method="post" th:object="${user}">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" th:field="*{email}" required th:required>
 

@@ -35,7 +35,7 @@ public class Product {
     private BigDecimal productPrice;
 
     @Column(nullable = false)
-    private ProductCategory category;
+    private String category;
     @Column(nullable = false)
     private int units;
     private String image;
@@ -43,9 +43,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "productId", referencedColumnName = "id")
     private Cart cart;
-
-
-
 }
 
 

@@ -17,12 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AdminController {
     private final ProductService productService;
 
-    @GetMapping("/add-product")
-    public String addProduct(Model model){
-        model.addAttribute("product", new ProductDTO());
-        return "dashboard";
-    }
-
     @PostMapping("/add-product")
     public String saveProduct(@ModelAttribute("product") ProductDTO productDTO, RedirectAttributes redirectAttributes){
         ModelAndView mav = new ModelAndView();
@@ -30,7 +24,7 @@ public class AdminController {
         productService.saveProduct(product);
         mav.addObject("product-added", "product saved successful");
         redirectAttributes.addFlashAttribute("product-added", "product saved successful");
-        return "redirect:dashboard";
+        return "redirect:/dashboard";
     }
 
 

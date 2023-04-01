@@ -1,15 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Ecommerce Home Page</title>
-  <!-- Bootstrap CSS -->
+  <title>Welcome to our Online Shop</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="./styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td input {
+      border: none;
+      padding: 5px;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    td button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    td button:hover {
+      background-color: #3e8e41;
+    }
+
+    .add-to-cart-button {
+      background-color: #008CBA;
+    }
+
+    .add-to-cart-button:hover {
+      background-color: #006F8E;
+    }
+
+    .like-button {
+      background-color: #f44336;
+    }
+
+    .like-button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
 </head>
 <body>
+<!--<h1>Welcome, <span th:text="${user}"></span>!</h1>-->
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Fruit Shoppa</a>
+    <a class="navbar-brand" href="#">Welcome to Shoppa!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -31,91 +104,37 @@
     </div>
   </nav>
 </div>
-
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+3" alt="Product 1">
-        <div class="card-body">
-          <h5>Banana Grits </h5>
-          <p>Banana Grits and its byproduct can be used to improve gut health as it utilises the resistant starch of the
-            banana. </p>
-          <p>$19.99</p>
-          <button class="btn btn-primary">Like</button>
-          <button th:onclick="" class="btn btn-primary">Add to Cart</button>
-        </div>
-
-        <img src="https://via.placeholder.com/300x200.png?text=Product+3" alt="Product 2">
-        <div class="card-body">
-          <h5>Kiwi Toast</h5>
-          <p>Yummy Recipe for Toast With Cream Cheese, Kiwi Slices And Honey</p>
-          <p>$29.99</p>
-          <button class="btn btn-primary">Like</button>
-          <button class="btn btn-primary">Add to Cart</button>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+3" alt="Product 3">
-        <div class="card-body">
-          <h5>Mango Slice</h5>
-          <p>Mango slices are fruity in flavor and aroma,
-            as well as slightly chewy in texture,
-            and will certainly add a bit of edible sunshine to your day!</p>
-          <p>$39.99</p>
-          <button class="btn btn-primary">Like</button>
-          <button class="btn btn-primary">Add to Cart</button>
-
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+3" alt="Product 4">
-        <div class="card-body">
-          <h5>Pineapple Mix</h5>
-          <p>This mix is made from pressing the natural liquid from the pulp of the pineapple.</p>
-          <p>$39.99</p>
-          <button class="btn btn-primary">Like</button>
-          <button class="btn btn-primary">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+3" alt="Product 5">
-        <div class="card-body">
-          <h5>Apple Cider</h5>
-          <p>Unfiltered and raw, it doesn't contain added sugar, undergoes minimal processing, and is usually unpasteurized.</p>
-          <p>$39.99</p>
-          <button class="btn btn-primary">Like</button>
-          <button class="btn btn-primary">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+3" alt="Product 6">
-        <div class="card-body">
-          <h5>Orange Punch</h5>
-          <p>With an earthy undertone and a citrus finish, Orange Punch is packed with flavor and freshness.</p>
-          <p>$39.99</p>
-          <button class="btn btn-primary">Like</button>
-          <button class="btn btn-primary">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<table>
+  <thead>
+  <tr>
+    <th>Product Id</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Quantity</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="product : ${listProducts}">
+    <td th:text="${product.id}">Product Id</td>
+    <td th:text="${product.productName}">Name</td>
+    <td th:text="${product.category}">Category</td>
+    <td th:text="${product.quantity}">Quantity</td>
+    <td th:text="${product.description}">Description</td>
+    <td th:text="${product.price}">Price</td>
+    <td>
+      <form th:action="@{/likeProduct}" method="post">
+        <button class="like-button">Like</button>
+      </form>
+      <form th:action="@{/addCart}" method="post">
+        <button class="add-to-cart-button">Add to cart</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>
+

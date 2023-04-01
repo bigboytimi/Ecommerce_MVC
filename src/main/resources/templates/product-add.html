@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Added Successfully</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2em;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 0.5em 1em;
+            margin: 0 0.5em;
+            border-radius: 0.5em;
+            background-color: #008CBA;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #006F8F;
+        }
+    </style>
+</head>
+<body>
+<h1>Product added successfully</h1>
+<p>What would you like to do next?</p>
+<div class="button-container">
+    <form th:action="@{/b2dashboard}" method="get">
+        <button type="submit">Back to Dashboard</button>
+    </form>
+    <form th:action="@{/logoutAdmin}" method="get">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+</body>
+</html>

@@ -5,6 +5,7 @@ import com.example.week7ecommerceapp.model.Product;
 import com.example.week7ecommerceapp.repository.ProductRepository;
 import com.example.week7ecommerceapp.service.ProductService;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,11 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    ProductRepository prodRepo;
+    private final ProductRepository prodRepo;
     @Override
     public void saveProduct(ProductDTO productDTO) {
         Product product = new Product(productDTO);

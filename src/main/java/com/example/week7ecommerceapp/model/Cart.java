@@ -1,5 +1,6 @@
 package com.example.week7ecommerceapp.model;
 
+import com.example.week7ecommerceapp.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,12 +17,20 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Column(nullable = false)
-    @OneToMany(mappedBy = "cart")
-    private List<Product> products = new ArrayList<>();
+    private String productName;
 
-    @Column(name = "quantity", nullable = false)
-    private int units;
+    @Column(nullable = false)
+    private String price;
+    @Column(nullable = false)
+    private String quantity;
 
+    public Cart(ProductDTO productDTO) {
+        Product product = new Product(productDTO);
+        this.id = product.getId();
+        this.productName = product.getProductName();
+        this.price = product.getPrice();
+        this.quantity = product.getQuantity();
+    }
 }

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
   <title>Add/Edit Product</title>
   <style>
     /* Add some basic styles to the form */
@@ -34,21 +33,21 @@
 <h1>Admin, Welcome to Dashboard</h1>
 <h3>Add or Edit Products Here</h3>
 
-<form method="post" th:action="@{/add-product}" th:object="${product}">
+<form th:action="@{/addProduct}" method="post" th:object="${product}">
   <label for="productName">Product Name:</label>
-  <input type="text" id="productName" th:field="${product.productName}" required>
+  <input type="text" id="productName" name="productName" th:field="*{productName}" th:required>
 
   <label for="category">Category:</label>
-  <input type="text" id="category" th:field="${product.category}" required>
+  <input type="text" id="category" name="category" th:field="*{category}" th:required>
 
-  <label for="productQuantity">Quantity:</label>
-  <input type="number" id="productQuantity" th:field="${product.quantity}" min="0" required>
+  <label for="quantity">Quantity:</label>
+  <input type="text" id="quantity" name="quantity" th:field="*{quantity}" th:required>
 
-  <label for="productDescription">Product Description:</label>
-  <textarea id="productDescription" th:field="${product.description}" required></textarea>
+  <label for="description">Product Description:</label>
+  <textarea type="text" id="description" name="description" th:field="*{description}" th:required></textarea>
 
-  <label for="productPrice">Price:</label>
-  <input type="number" id="productPrice" th:field="${product.price}" min="0" step="0.01" required>
+  <label for="price">Price:</label>
+  <input type="text" id="price" name="price" th:field="*{price}" th:required>
 
   <input type="submit" value="Submit">
 </form>

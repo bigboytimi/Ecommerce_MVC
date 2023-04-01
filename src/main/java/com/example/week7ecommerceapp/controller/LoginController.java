@@ -48,8 +48,11 @@ public class LoginController {
         HttpSession session = httpServletRequest.getSession(true);
         Long id = user.getId();
         session.setAttribute("usersession", id);
+        model.addAttribute("listProducts", productService.getAllProduct());
         return "index";
     }
+
+
 
     @GetMapping("/logout-button")
     public ModelAndView logoutUser(ModelAndView mav, HttpServletRequest httpServletRequest){
@@ -72,27 +75,12 @@ public class LoginController {
 
         if(admin == null){
             model.addAttribute("invalid email", "email not found");
-            return "signup-admin";
+            return "signupAdmin";
         }
         HttpSession session = httpServletRequest.getSession();
-        Long id = admin.getId();
-        session.setAttribute("admin-session", id);
-        return "ad";
+        String email = admin.getEmail();
+        session.setAttribute("email", email);
+        model.addAttribute("product", new ProductDTO());
+        return "redirect:/dashboard";
     }
-
-//    @GetMapping("/dashboard")
-//    public ModelAndView getDashboard(ModelAndView model){
-//        model.addObject("product", new ProductDTO());
-//        model.setViewName("dashboard");
-//        return model;
-//    }
-//
-//    @PostMapping("/dashboard")
-//    public ModelAndView addProduct(@ModelAttribute("product") ProductDTO productDTO, ModelAndView mav, RedirectAttributes redirectAttributes){
-//        productService.saveProduct(productDTO);
-//        redirectAttributes.addFlashAttribute("product added", "product saved successfully");
-//        mav.addObject("product added", "product successfully added");
-//        mav.setViewName("dashboard");
-//        return mav;
-//    }
 }

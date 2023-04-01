@@ -9,6 +9,7 @@ import com.example.week7ecommerceapp.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,40 +23,41 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
+    @Autowired
     private final ProductService productService;
+    @Autowired
     private final AdminService adminService;
 
-    @GetMapping("/dashboard")
-    public String getDashboard(HttpServletRequest httpServletRequest, Model model){
-        HttpSession session = httpServletRequest.getSession();
-        List<Product> products = productService.getAllProduct();
-        String email = (String) session.getAttribute("email");
-//        Long id = (Long) session.getAttribute("id");
-//        Admin admin = adminService.findByEmail(email);
-        model.addAttribute("admin", new Admin());
-        model.addAttribute("products", products);
-//        model.addAttribute("id", admin.getId());
-        model.addAttribute("product", new ProductDTO());
 
-        if(session.getAttribute(email)==null){
+    @GetMapping( value="/dashboard")
+    public String dashboard(@ModelAttribute("product") ProductDTO productDTO, HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        String email = (String) session.getAttribute("email");
+        Admin admin = adminService.findByEmail(email);
+        if(admin == null){
             return "loginAdmin";
-        } else{
-            return "add-product";
+        }else {
+            return "dashboard";
         }
     }
-
-    @GetMapping("/add-product")
-    public String addProduct(Model model){
-        model.addAttribute("product", new ProductDTO());
-        return "add-product";
-    }
-
-    @PostMapping("/add-product")
-    public String addProduct(@ModelAttribute("product") ProductDTO productDTO, RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("product-added", "product added successfully");
-        productService.saveProduct(productDTO);
+    @GetMapping("/addProduct")
+    public String addProduct(@ModelAttribute("product") ProductDTO productDTO){
         return "dashboard";
     }
+    @PostMapping("/addProduct")
+    public String addProduct(@ModelAttribute("product") ProductDTO productDTO, RedirectAttributes redirectAttributes){
+        productService.saveProduct(productDTO);
+        redirectAttributes.addFlashAttribute("product-added", "product added successfully");
+        return "product-add";
+    }
 
+    @GetMapping("/b2dashboard")
+    public String backToDashboard(){
+        return "redirect:/dashboard";
+    }
 
+    @GetMapping("/logoutAdmin")
+    public String logoutAdmin(){
+        return "redirect:/loginAdmin";
+    }
 }

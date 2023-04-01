@@ -1,88 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cart Items</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles.css">
+    <meta charset="UTF-8">
+    <title>Welcome, User!</title>
+    <style>
+        /* Amazing CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 80%;
+            background-color: white;
+            box-shadow: 0px 2px 2px #888888;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .button:hover {
+            background-color: #3e8e41;
+        }
+        .total {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index">Fruit Shoppa</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index">Home</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Cart Items</h1>
-            <div class="cart-item">
-                <img src="https://via.placeholder.com/150x100.png?text=Product+Image" alt="Product Image" class="cart-item-img">
-                <p class="cart-item-title">Product Name</p>
-                <p class="cart-item-price">$29.99</p>
-                <div class="cart-item-quantity">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="1">
-                </div>
-                <div class="cart-item-actions">
-                    <button class="btn btn-primary">Update</button>
-                    <button class="btn btn-danger cart-item-remove">Remove</button>
-                </div>
-                <p class="cart-item-total">Total: $29.99</p>
-            </div>
-            <div class="cart-item">
-                <img src="https://via.placeholder.com/150x100.png?text=Product+Image" alt="Product Image" class="cart-item-img">
-                <p class="cart-item-title">Product Name</p>
-                <p class="cart-item-price">$29.99</p>
-                <div class="cart-item-quantity">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="1">
-                </div>
-                <div class="cart-item-actions">
-                    <button class="btn btn-primary">Update</button>
-                    <button class="btn btn-danger cart-item-remove">Remove</button>
-                </div>
-                <p class="cart-item-total">Total: $29.99</p>
-            </div>
-            <div class="cart-item">
-                <img src="https://via.placeholder.com/150x100.png?text=Product+Image" alt="Product Image" class="cart-item-img">
-                <p class="cart-item-title">Product Name</p>
-                <p class="cart-item-price">$29.99</p>
-                <div class="cart-item-quantity">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="1">
-                </div>
-                <div class="cart-item-actions">
-                    <button class="btn btn-primary">Update</button>
-                    <button class="btn btn-danger cart-item-remove">Remove</button>
-                </div>
-                <p class="cart-item-total">Total: $29.99</p>
-            </div>
-            <div class="cart-total">
-                <p>Total: $29.99</p>
-            </div>
-            <div class="cart-actions">
-                <a href="#" class="btn btn-primary">Continue Shopping</a>
-                <a href="#" class="btn btn-secondary">Go to Checkout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<h1>Welcome, User!</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Product Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}">Product Id</td>
+        <td th:text="${product.name}">Product Name</td>
+        <td th:text="${product.price}">Product Price</td>
+        <td th:text="${product.quantity}">Quantity</td>
+        <td><button class="button">Remove</button></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="total">Total:</td>
+        <td th:text="${products.sum('quantity')}"></td>
+        <td><button class="button">CheckOut</button></td>
+    </tr>
+    </tfoot>
+</table>
 </body>
 </html>

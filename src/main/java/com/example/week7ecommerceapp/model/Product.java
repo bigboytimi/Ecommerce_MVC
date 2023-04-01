@@ -15,33 +15,29 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
     @Column(nullable = false)
     private String productName;
+    @Column(nullable = false)
+    private String category;
+    @Column(nullable = false)
+    private String quantity;
+    @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
+    private String price;
 
     public Product(ProductDTO productDTO){
         this.productName = productDTO.getProductName();
         this.category = productDTO.getCategory();
+        this.quantity = productDTO.getQuantity();
         this.description = productDTO.getDescription();
-        this.productPrice = productDTO.getPrice();
+        this.price = productDTO.getPrice();
+
     }
-    @Column(nullable = false)
-    private long serialNum;
-
-    @Column(nullable = false)
-    private String description;
-    @Column(nullable = false)
-    private BigDecimal productPrice;
-
-    @Column(nullable = false)
-    private String category;
-    @Column(nullable = false)
-    private int units;
-    private String image;
-
     @ManyToOne
-    @JoinColumn(name = "productId", referencedColumnName = "id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Cart cart;
 }
 

@@ -77,22 +77,22 @@ public class LoginController {
         HttpSession session = httpServletRequest.getSession();
         Long id = admin.getId();
         session.setAttribute("admin-session", id);
-        return "dashboard";
+        return "ad";
     }
 
-    @GetMapping("/dashboard")
-    public ModelAndView getDashboard(ModelAndView model){
-        model.addObject("product", new ProductDTO());
-        model.setViewName("dashboard");
-        return model;
-    }
-
-    @PostMapping("/dashboard")
-    public ModelAndView addProduct(@ModelAttribute("product") ProductDTO productDTO, ModelAndView mav, RedirectAttributes redirectAttributes){
-        productService.saveProduct(productDTO);
-        redirectAttributes.addFlashAttribute("product added", "product saved successfully");
-        mav.addObject("product added", "product successfully added");
-        mav.setViewName("dashboard");
-        return mav;
-    }
+//    @GetMapping("/dashboard")
+//    public ModelAndView getDashboard(ModelAndView model){
+//        model.addObject("product", new ProductDTO());
+//        model.setViewName("dashboard");
+//        return model;
+//    }
+//
+//    @PostMapping("/dashboard")
+//    public ModelAndView addProduct(@ModelAttribute("product") ProductDTO productDTO, ModelAndView mav, RedirectAttributes redirectAttributes){
+//        productService.saveProduct(productDTO);
+//        redirectAttributes.addFlashAttribute("product added", "product saved successfully");
+//        mav.addObject("product added", "product successfully added");
+//        mav.setViewName("dashboard");
+//        return mav;
+//    }
 }

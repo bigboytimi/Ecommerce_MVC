@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class ProductDTO {
     private String productName;
     private String category;
-    private String quantity;
+    private int quantity;
     private String description;
-    private String price;
+    private double price;
 }

@@ -49,10 +49,21 @@ public class LoginController {
         Long id = user.getId();
         session.setAttribute("usersession", id);
         model.addAttribute("listProducts", productService.getAllProduct());
+        model.addAttribute("usersession", session.getAttribute("usersession"));
         return "index";
     }
 
-
+    @GetMapping("/index")
+    public ModelAndView getIndex(ModelAndView model, HttpServletRequest httpServletRequest){
+        HttpSession session = httpServletRequest.getSession();
+        if(session.getAttribute("usersession")==null){
+            model.setViewName("signin");
+            return model;
+        }
+        model.setViewName("index");
+        model.addObject("listProducts", productService.getAllProduct());
+        return model;
+    }
 
     @GetMapping("/logout-button")
     public ModelAndView logoutUser(ModelAndView mav, HttpServletRequest httpServletRequest){
@@ -62,25 +73,23 @@ public class LoginController {
         return mav;
     }
 
-    @GetMapping("/loginAdmin")
-    public String adminLogin(Model model, HttpServletRequest httpServletRequest){
-        model.addAttribute("admin", new AdminDTO());
-        model.addAttribute("invalid email", null);
-        return "loginAdmin";
+    @GetMapping("/signup")
+    public String viewSignUp(Model model){
+        model.addAttribute("user", new UserDTO());
+        model.addAttribute("user-exist", "user-signup");
+        return "signup";
     }
 
-    @PostMapping("/loginAdmin")
-    public String registerAdmin(@ModelAttribute("admin") AdminDTO adminDTO, Model model, HttpServletRequest httpServletRequest){
-        Admin admin = adminService.findByEmail(adminDTO.getEmail());
-
-        if(admin == null){
-            model.addAttribute("invalid email", "email not found");
-            return "signupAdmin";
+    @PostMapping("/signup")
+    public String registerUser(@ModelAttribute("user") UserDTO userDTO, Model model){
+        User user1 = userService.findByEmail(userDTO.getEmail());
+        if(user1 != null){
+            model.addAttribute("user-exist", "user already exists");
+            return "signup";
+        } else{
+            model.addAttribute("user", userDTO);
+            userService.addUser(userDTO);
+            return "signin";
         }
-        HttpSession session = httpServletRequest.getSession();
-        String email = admin.getEmail();
-        session.setAttribute("email", email);
-        model.addAttribute("product", new ProductDTO());
-        return "redirect:/dashboard";
     }
 }

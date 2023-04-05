@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -17,20 +15,15 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(nullable = false)
-    private String productName;
+    private Long id;
+    @JoinColumn(name = "product_Id", nullable = false)
+    private Long product_id;
+    @JoinColumn(name = "user_id", nullable = false)
+    private Long user_id;
 
+    @Column(name = "product_price", nullable = false)
+    private Double price;
     @Column(nullable = false)
-    private String price;
-    @Column(nullable = false)
-    private String quantity;
+    private int quantity;
 
-    public Cart(ProductDTO productDTO) {
-        Product product = new Product(productDTO);
-        this.id = product.getId();
-        this.productName = product.getProductName();
-        this.price = product.getPrice();
-        this.quantity = product.getQuantity();
-    }
 }

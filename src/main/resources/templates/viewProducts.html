@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>View All Products</title>
+  <style>
+    /* Add some basic styles to the table */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<h1>All Products</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Product Name</th>
+    <th>Category</th>
+    <th>Quantity</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Loop through the list of products and display them in the table -->
+  <tr th:each="product : ${productList}">
+    <td th:text="${product.productName}"></td>
+    <td th:text="${product.category}"></td>
+    <td th:text="${product.quantity}"></td>
+    <td th:text="${product.description}"></td>
+    <td th:text="${product.price}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -16,22 +16,23 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(nullable = false)
     private long id;
     @Column(nullable = false)
     private String productName;
     @Column(nullable = false)
     private String category;
     @Column(nullable = false)
-    private String quantity;
+    private int quantity;
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private String price;
+    private double price;
 
     public Product(ProductDTO productDTO){
         this.productName = productDTO.getProductName();
         this.category = productDTO.getCategory();
-        this.quantity = productDTO.getQuantity();
+        this.quantity = 1;
         this.description = productDTO.getDescription();
         this.price = productDTO.getPrice();
 

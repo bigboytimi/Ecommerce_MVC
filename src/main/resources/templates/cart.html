@@ -59,20 +59,24 @@
 <table>
     <thead>
     <tr>
+        <th>Id</th>
         <th>Product Id</th>
-        <th>Name</th>
-        <th>Price</th>
+        <th>User Id</th>
         <th>Quantity</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.id}">Product Id</td>
-        <td th:text="${product.name}">Product Name</td>
-        <td th:text="${product.price}">Product Price</td>
-        <td th:text="${product.quantity}">Quantity</td>
-        <td><button class="button">Remove</button></td>
+    <tr th:each="cart : ${carts}">
+        <td th:text="${cart.id}">Cart Id</td>
+        <td th:text="${cart.product_id}">Product Id</td>
+        <td th:text="${cart.user_id}">User Id</td>
+        <td th:text="${cart.price}">Price</td>
+        <td th:text="${cart.quantity}">Quantity</td>
+        <form th:action="@{/removeCartItem}" method="post">
+            <input type="hidden" name="cartId" th:value="${cart.id}" />
+            <td><button class="button">Remove</button></td>
+        </form>
     </tr>
     </tbody>
     <tfoot>
@@ -80,10 +84,11 @@
         <td></td>
         <td></td>
         <td class="total">Total:</td>
-        <td th:text="${products.sum('quantity')}"></td>
         <td><button class="button">CheckOut</button></td>
     </tr>
     </tfoot>
 </table>
 </body>
 </html>
+
+

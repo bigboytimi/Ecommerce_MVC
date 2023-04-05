@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -33,23 +34,26 @@
 <h1>Admin, Welcome to Dashboard</h1>
 <h3>Add or Edit Products Here</h3>
 
+
 <form th:action="@{/addProduct}" method="post" th:object="${product}">
   <label for="productName">Product Name:</label>
-  <input type="text" id="productName" name="productName" th:field="*{productName}" th:required>
+  <input type="text" id="productName" name="productName" th:field="*{productName}" required>
 
   <label for="category">Category:</label>
-  <input type="text" id="category" name="category" th:field="*{category}" th:required>
+  <input type="text" id="category" name="category" th:field="*{category}" required>
 
   <label for="quantity">Quantity:</label>
-  <input type="text" id="quantity" name="quantity" th:field="*{quantity}" th:required>
+  <input type="text" id="quantity" name="quantity" th:field="*{quantity}" required>
 
   <label for="description">Product Description:</label>
-  <textarea type="text" id="description" name="description" th:field="*{description}" th:required></textarea>
+  <textarea type="text" id="description" name="description" th:field="*{description}" required></textarea>
 
   <label for="price">Price:</label>
-  <input type="text" id="price" name="price" th:field="*{price}" th:required>
+  <input type="text" id="price" name="price" th:field="*{price}"  required>
 
   <input type="submit" value="Submit">
+
+  <a href="/viewProducts">View All Products</a>
 </form>
 </body>
 </html>

@@ -1,13 +1,16 @@
 package com.example.week7ecommerceapp.service.implementation;
 
 import com.example.week7ecommerceapp.dto.UserDTO;
+import com.example.week7ecommerceapp.model.Product;
 import com.example.week7ecommerceapp.model.User;
+import com.example.week7ecommerceapp.repository.ProductRepository;
 import com.example.week7ecommerceapp.repository.UserRepository;
 import com.example.week7ecommerceapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +21,11 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private final UserRepository repo;
+
+    @Autowired
+    private final ProductRepository productRepository;
+
+    HashMap<Long, Product> tempCart = new HashMap<>();
 
     @Override
     public void addUser(UserDTO userDTO) {

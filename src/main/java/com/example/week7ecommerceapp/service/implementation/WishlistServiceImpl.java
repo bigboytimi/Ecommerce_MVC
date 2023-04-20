@@ -22,12 +22,18 @@ public class WishlistServiceImpl implements WishlistService {
     }
 
     @Override
-    public void addWishlist(Wishlist wishlist) {
+    public Wishlist addWishlist(Wishlist wishlist) {
         wishlistRepository.save(wishlist);
+        return wishlist;
     }
 
     @Override
     public void removeWishList(Long id) {
         wishlistRepository.deleteById(id);
+    }
+
+    @Override
+    public Wishlist getWishlistByProductId(Long id) {
+        return wishlistRepository.findByProductId(id);
     }
 }

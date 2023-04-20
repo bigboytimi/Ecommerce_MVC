@@ -117,13 +117,15 @@ public class AdminController {
     @PostMapping("/addToCart")
     public String addCart(@RequestParam("product_id") Long product_id, @RequestParam("product_price") Double price, HttpSession session){
         Long userId = (Long) session.getAttribute("usersession");
-        if(userId == null){
-            return "redirect:/signin";
+        Cart cart = cartService.getCartItemByProductId(product_id);
+        if(cart != null){
+            cart.setQuantity(cart.getQuantity() + 1);
         }
-        Cart cart = new Cart();
+        cart = new Cart();
         cart.setUser_id(userId);
         cart.setProduct_id(product_id);
         cart.setPrice(price);
+        cart.setQuantity(1);
         cartService.addToCart(cart);
         return "redirect:/index";
     }
@@ -135,8 +137,9 @@ public class AdminController {
                               @RequestParam("price") String price,
                               HttpSession session){
         Long userId = (Long) session.getAttribute("usersession");
-        if(userId == null){
-            return "redirect:/signin";
+        Wishlist list = wishlistService.getWishlistByProductId(id);
+        if(list != null){
+            return "redirect:/index";
         }
         Wishlist wishlist = new Wishlist();
         wishlist.setProduct_id(id);

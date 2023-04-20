@@ -1,15 +1,12 @@
 package com.example.week7ecommerceapp.service;
 
 import com.example.week7ecommerceapp.dto.UserDTO;
-import com.example.week7ecommerceapp.model.Product;
 import com.example.week7ecommerceapp.model.User;
-import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface  UserService {
-    void addUser(UserDTO userDTO);
+    User addUser(UserDTO userDTO);
     User getUserById(long id);
     void deleteUser(User user);
     List<User> findAllUsers();

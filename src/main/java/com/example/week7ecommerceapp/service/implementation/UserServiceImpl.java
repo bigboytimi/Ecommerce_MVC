@@ -28,9 +28,10 @@ public class UserServiceImpl implements UserService{
     HashMap<Long, Product> tempCart = new HashMap<>();
 
     @Override
-    public void addUser(UserDTO userDTO) {
+    public User addUser(UserDTO userDTO) {
         User user = new User(userDTO);
         repo.save(user);
+        return user;
     }
 
     @Override
@@ -39,10 +40,12 @@ public class UserServiceImpl implements UserService{
         User user1 = null;
         if(optionalUser.isPresent()){
             user1 = optionalUser.get();
+            return user1;
         } else{
-            throw new RuntimeException("User with " + id + "not found!");
+            return user1;
+//            throw new RuntimeException("User with " + id + "not found!");
         }
-        return user1;
+
     }
 
     @Override

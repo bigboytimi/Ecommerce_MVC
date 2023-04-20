@@ -1,8 +1,14 @@
 package com.example.week7ecommerceapp.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     private String firstName;
 
@@ -12,7 +18,7 @@ public class UserDTO {
 
     private String email;
 
-    private long phoneNumber;
+    private Long phoneNumber;
 
     private String address;
 }

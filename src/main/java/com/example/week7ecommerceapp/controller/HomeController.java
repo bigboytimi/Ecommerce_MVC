@@ -76,6 +76,12 @@ public class HomeController {
         cartService.removeFromCartById(id);
         return "redirect:/cart";
     }
+
+    @PostMapping("/removeWishlistItem")
+    public String removeWishlistItem(@RequestParam("itemId") Long id){
+        wishlistService.removeWishList(id);
+        return "redirect:/wishlist";
+    }
 }
 
 

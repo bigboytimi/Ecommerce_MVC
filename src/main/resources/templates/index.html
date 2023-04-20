@@ -95,7 +95,7 @@
           <a class="nav-link" href="/cart">Cart</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="redirect:/wishlist">Wishlist</a>
+          <a class="nav-link" href="/wishlist">Wishlist</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
@@ -125,7 +125,7 @@
     <td th:text="${product.description}">Description</td>
     <td th:text="${product.price}">Price</td>
     <td>
-      <form th:action="@{/addToWishlist}" method="POST">
+      <form th:action="@{/addToWishlist}" method="post">
         <input type="hidden" th:name="product_id" th:value="${product.id}"/>
         <input type="hidden" th:name="productName" th:value="${product.productName}"/>
         <input type="hidden" th:name="description" th:value="${product.description}"/>

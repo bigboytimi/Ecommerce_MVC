@@ -4,10 +4,8 @@ import com.example.week7ecommerceapp.dto.ProductDTO;
 import com.example.week7ecommerceapp.model.Product;
 import com.example.week7ecommerceapp.repository.ProductRepository;
 import com.example.week7ecommerceapp.service.ProductService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +19,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private final ProductRepository prodRepo;
     @Override
-    public void saveProduct(ProductDTO productDTO) {
+    public Product saveProduct(ProductDTO productDTO) {
         Product product = new Product(productDTO);
         prodRepo.save(product);
+        return product;
     }
 
     @Override
@@ -32,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(long id) {
+    public Product getProductById(Long id) {
         Optional<Product> optionalProduct = prodRepo.findById(id);
         Product testProduct = null;
         if(optionalProduct.isPresent()){
@@ -44,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductById(long id) {
+    public void deleteProductById(Long id) {
         prodRepo.deleteById(id);
     }
 }

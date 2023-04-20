@@ -32,7 +32,7 @@ public class Product {
     public Product(ProductDTO productDTO){
         this.productName = productDTO.getProductName();
         this.category = productDTO.getCategory();
-        this.quantity = 1;
+        this.quantity = productDTO.getQuantity();
         this.description = productDTO.getDescription();
         this.price = productDTO.getPrice();
 

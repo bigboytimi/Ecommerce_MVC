@@ -11,17 +11,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
 
     @Autowired
-    public AdminRepository adminRepo;
-
+    private AdminRepository adminRepo;
     @Autowired
-    public ProductRepository productRepository;
+    private ProductRepository productRepository;
+
+    public AdminServiceImpl(AdminRepository adminRepo, ProductRepository productRepository) {
+        this.adminRepo = adminRepo;
+        this.productRepository = productRepository;
+    }
+
     @Override
     public Admin findByEmail(String email) {
         Admin admin = adminRepo.findByEmail(email);
@@ -33,23 +36,25 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void save(AdminDTO adminDTO) {
+    public Admin save(AdminDTO adminDTO) {
         Admin admin = new Admin(adminDTO);
         adminRepo.save(admin);
+        return admin;
     }
 
     @Override
-    public void deleteProduct(long id) {
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
         System.out.println("Product successfully deleted");
     }
 
     @Override
-    public void updateProduct(long id, ProductDTO productDTO) {
+    public Product updateProduct(Long id, ProductDTO productDTO) {
         Product product = productRepository.findById(id).orElse(null);
         if(product == null){
             Product toBeAdded = new Product(productDTO);
             productRepository.save(toBeAdded);
+            return toBeAdded;
         } else{
             product.setProductName(productDTO.getProductName());
             product.setQuantity(productDTO.getQuantity());
@@ -58,6 +63,7 @@ public class AdminServiceImpl implements AdminService {
             product.setPrice(productDTO.getPrice());
             productRepository.save(product);
         }
+        return product;
     }
 
 
